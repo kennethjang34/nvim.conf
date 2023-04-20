@@ -1,5 +1,6 @@
 return {
 	'neoclide/coc.nvim',
+	branch = 'release',
 	config = function()
 		local function map(mode, lhs, rhs, opts)
 			local options = { noremap = true, silent = true }
@@ -99,11 +100,5 @@ return {
 			'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
 		keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 		keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
-		--nnoremap <silent> <C-l> :wincmd l<CR>
-		--nnoremap <silent> <C-h> :wincmd h<CR>
-		--inoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-		--inoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-		--vnoremap <silent><nowait><expr> <C-j> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-j>"
-		--vnoremap <silent><nowait><expr> <C-k> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-k>"
 	end
-} --, {'branch': 'release'}},
+}
