@@ -1,5 +1,5 @@
 return {
-	{ 'nvim-lua/plenary.nvim',           lazy = false },
+	{ 'nvim-lua/plenary.nvim', lazy = false },
 	'github/copilot.vim',
 	'gioele/vim-autoswap',
 	'vim-airline/vim-airline',
@@ -22,8 +22,7 @@ return {
 	'famiu/nvim-reload',
 	'tpope/vim-surround',
 	'tpope/vim-fugitive',
-	{ 'nvim-treesitter/nvim-treesitter', build = ":TSUpdate" },
-	{ 'dccsillag/magma-nvim',            build = ':UpdateRemotePlugins' },
+	{ 'dccsillag/magma-nvim',  build = ':UpdateRemotePlugins' },
 	'steelsojka/pears.nvim',
 	'nvim-tree/nvim-web-devicons',
 }
