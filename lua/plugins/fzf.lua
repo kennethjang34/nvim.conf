@@ -24,7 +24,9 @@ return {
 		keyset('n', '<leader>H', '<cmd>Helptags<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>hh', '<cmd>History<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>h:', '<cmd>History:<CR>', { silent = true, noremap = true })
+		keyset('n', '<leader>hc', '<cmd>History:<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>h/', '<cmd>History/<CR>', { silent = true, noremap = true })
+		keyset('n', '<leader>hs', '<cmd>History/<CR>', { silent = true, noremap = true })
 		vim.g.layout = { window = { width = 1.0, height = 0.5, highlight = 'Comment', rounded = false } }
 		vim.g.fzf_buffers_jump = 1
 		vim.g.fzf_preview_window = { 'right:60%' }
