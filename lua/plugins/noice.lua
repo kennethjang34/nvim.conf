@@ -1,5 +1,6 @@
 return ({
 	"folke/noice.nvim",
+	enabled = false,
 	config = function()
 		require("noice").setup({
 			-- add any options here
@@ -28,12 +29,24 @@ return ({
 				--lsp_doc_border = false, -- add a border to hover docs and signature help
 			},
 			popupmenu = {
-				enabled = true, -- enables the Noice popupmenu UI
+				enabled = false, -- enables the Noice popupmenu UI
 				---@type 'nui'|'cmp'
 				backend = "nui", -- backend to use to show regular cmdline completions
-				---@type NoicePopupmenuItemKind|false
 				-- Icons for completion item kinds (see defaults at noice.config.icons.kinds)
 				kind_icons = {}, -- set to `false` to disable icons
+			},
+			rediret = {
+				enabled = true, -- enables the Noice redirect UI
+				-- NOTE: If you enable redirect, then the cmdline is enabled automatically.
+				-- This is a current Neovim limitation.
+				view = "notify", -- default view for messages
+			},
+			hover = {
+				enabled = false,
+				silent = true,
+			},
+			documentation = {
+				view = "notify"
 			},
 			messages = {
 				-- NOTE: If you enable messages, then the cmdline is enabled automatically.
@@ -46,7 +59,8 @@ return ({
 				view_search = "virtualtext", -- view for search count messages. Set to `false` to disable
 			},
 			notify = {
-				enabled = false, -- enables the Noice notify UI
+				enabled = true, -- enables the Noice notify UI
+				view = "notify",
 				-- NOTE: If you enable notify, then the cmdline is enabled automatically.
 				-- This is a current Neovim limitation.
 				--view = "notify", -- default view for messages
