@@ -22,7 +22,7 @@ keyset("n", "<C-p>", '"+p', { noremap = true, silent = true })
 keyset("v", "<C-v>", '"+p', { noremap = true, silent = true })
 keyset("v", "<C-p>", '"+p', { noremap = true, silent = true })
 api.nvim_create_augroup("saved", { clear = true })
-api.nvim_create_autocmd("BufWritePost", { group = "saved", pattern = "init.lua", command = "luafile init.lua" })
+api.nvim_create_autocmd("BufWritePost", { group = "saved", pattern = "init.lua", command = "luafile lua/init.lua" })
 -- Highlight on yank
 local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
@@ -40,3 +40,7 @@ vim.o.timeoutlen = 450
 vim.o.confirm = true
 keyset('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
+-- normal mode <c-j> and <c-k> keymaps are configured in plugins/coc.lua
+keyset('n', 'q:', '<nop>')
+keyset('n', 'q/', '<nop>')
+keyset('n', 'q?', '<nop>')

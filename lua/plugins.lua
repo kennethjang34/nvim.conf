@@ -26,6 +26,4 @@ return {
 	{ 'dccsillag/magma-nvim',            build = ':UpdateRemotePlugins' },
 	'steelsojka/pears.nvim',
 	'nvim-tree/nvim-web-devicons',
-	--'nvim-lua/popup.nvim',
-	--'norcalli/nvim-colorizer.lua',
 }

@@ -27,6 +27,10 @@ return {
 			group = 'Floaterm',
 			pattern = "floaterm",
 			callback = function()
+				vim.api.nvim_buf_set_keymap(0, 't', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
+				vim.api.nvim_buf_set_keymap(0, 't', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
+				vim.api.nvim_buf_set_keymap(0, 't', '<c-j>', '<cmd>wincmd j<cr>', { silent = true, noremap = true })
+				vim.api.nvim_buf_set_keymap(0, 't', '<c-k>', '<cmd>wincmd k<cr>', { silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, "n", "<F4>",
 					":FloatermUpdate --width=1.0 --height=0.3 --wintype=split --position=botright<CR>",
 					{ silent = true, noremap = true })
