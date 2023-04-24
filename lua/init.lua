@@ -41,6 +41,7 @@ vim.o.confirm = true
 keyset('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
 -- normal mode <c-j> and <c-k> keymaps are configured in plugins/coc.lua
-keyset('n', 'q:', '<nop>')
-keyset('n', 'q/', '<nop>')
-keyset('n', 'q?', '<nop>')
+-- keyset('n', 'q:', '<nop>')
+-- keyset('n', 'q/', '<nop>')
+-- keyset('n', 'q?', '<nop>')
+keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })
