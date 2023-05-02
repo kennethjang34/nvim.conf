@@ -15,14 +15,15 @@ function _G.check_back_space()
 	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
 
-local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
+local opts = { silent = true, noremap = true, expr = true, replace_keycodes = vim }
 keyset("n", "<C-c>", '"*y :let @+=@*<CR>', { noremap = true, silent = true })
 keyset("v", "<C-c>", '"*y :let @+=@*<CR>', { noremap = true, silent = true })
 keyset("n", "<C-p>", '"+p', { noremap = true, silent = true })
 keyset("v", "<C-v>", '"+p', { noremap = true, silent = true })
 keyset("v", "<C-p>", '"+p', { noremap = true, silent = true })
 api.nvim_create_augroup("saved", { clear = true })
-api.nvim_create_autocmd("BufWritePost", { group = "saved", pattern = "init.lua", command = "luafile lua/init.lua" })
+api.nvim_create_autocmd("BufWritePost",
+	{ group = "saved", pattern = "init.lua", command = "luafile $HOME/.config/nvim/lua/init.lua" })
 -- Highlight on yank
 local yankGrp = api.nvim_create_augroup("YankHighlight", { clear = true })
 api.nvim_create_autocmd("TextYankPost", {
@@ -45,3 +46,4 @@ keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
 -- keyset('n', 'q/', '<nop>')
 -- keyset('n', 'q?', '<nop>')
 keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })
+keyset('i', '<c-j>', '<cr>', { silent = true, noremap = true })
