@@ -28,7 +28,7 @@ return {
 		--\ 'coc-prettier',
 		--\ 'coc-json',
 		--\ ]
-		--inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
+		-- inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
 		map('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<C-g>u\\<CR>"', opts)
 		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'<C-q>'", opts)
 		map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
@@ -49,16 +49,16 @@ return {
 		local keyset = vim.keymap.set
 		keyset("i", "<c-space>", "coc#refresh()", opts)
 
-		-- Use `[g` and `]g` to navigate diagnostics
-		-- Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
 		keyset("n", "[d", "<Plug>(coc-diagnostic-prev)", { silent = true, noremap = true })
 		keyset("n", "]d", "<Plug>(coc-diagnostic-next)", { silent = true, noremap = true })
 
-		-- GoTo code navigation
 		keyset("n", "gd", "<Plug>(coc-definition)", { silent = true, noremap = true })
 		keyset("n", "gy", "<Plug>(coc-type-definition)", { silent = true, noremap = true })
 		keyset("n", "gi", "<Plug>(coc-implementation)", { silent = true, noremap = true })
 		keyset("n", "gr", "<Plug>(coc-references)", { silent = true, noremap = true })
+		keyset("n", "gh", "<Plug>(coc-diagnostic-info)",
+			{ silent = true, noremap = true })
+		keyset("n", "<c-q>", "<Plug>(coc-float-hide)", { silent = true, noremap = true })
 		function _G.show_docs()
 			local cw = vim.fn.expand('<cword>')
 			if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
