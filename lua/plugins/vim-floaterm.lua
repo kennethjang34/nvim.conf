@@ -19,7 +19,6 @@ return {
 		map("t", "<F9>", "<C-\\><C-n>:FloatermNext<CR>")
 		map("n", "<F8>", ":FloatermToggle<CR>")
 		map("t", "<F8>", "<C-\\><C-n>:FloatermToggle<CR>")
-		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'<C-q>'", { expr = true })
 		local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 		local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 		augroup('Floaterm', { clear = true })
