@@ -1,6 +1,5 @@
 return {
 	{ 'nvim-lua/plenary.nvim', lazy = false },
-	'github/copilot.vim',
 	'gioele/vim-autoswap',
 	'vim-airline/vim-airline',
 	'vim-airline/vim-airline-themes',

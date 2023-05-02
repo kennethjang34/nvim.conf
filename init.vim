@@ -17,10 +17,6 @@ let g:rooter_change_directory_for_non_project_files = 'current'
 "let g:rooter_change_directory_for_non_project_files = ''
 let g:rooter_manual_only = 1
 "set noautochdir
-inoremap <silent><script><expr> <Right> copilot#Accept("")
-inoremap <silent> <C-p> <Plug>(copilot-previous)
-inoremap <silent> <C-n> <Plug>(copilot-next)
-let g:copilot_no_tab_map = v:true
 nnoremap <SPACE> <Nop>
 let mapleader=" "
 "for which key plugin
@@ -313,7 +309,7 @@ function! GoBackToRecentBuffer()
   endwhile
 endfunction
 nnoremap <silent> <S-TAB> :call GoBackToRecentBuffer()<Enter>
-nnoremap <C-q> <Nop>
+" nnoremap <C-q> <Nop>
 
 " Fast window resizing with +/- keys (horizontal); / and * keys (vertical)
 if bufwinnr(1)
