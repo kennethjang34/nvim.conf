@@ -1,4 +1,5 @@
 vim.g.mapleader = " "
+vim.g.coc_node_path = '$HOME/.nvm/versions/node/v18.9.0/bin/node'
 require('load_lazy')
 --vim.cmd([[colorscheme gruvbox]])
 vim.o.background = "dark"
