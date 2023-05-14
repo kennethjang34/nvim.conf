@@ -29,10 +29,10 @@ return {
 		--\ 'coc-json',
 		--\ ]
 		-- inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
-		map('i', '<cr>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<C-g>u\\<CR>"', opts)
+		map('i', '<TAB>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<C-g>u\\<TAB>"', opts)
 		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'<C-q>'", opts)
-		map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-			opts)
+		-- map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
+		-- 	opts)
 		map("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
 		map("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true, noremap = true })
 		map("x", "<C-s>", "<Plug>(coc-range-select)", { silent = true, noremap = true })
