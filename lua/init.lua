@@ -1,3 +1,6 @@
+vim.g.copilot_no_tab_map = true
+vim.g.copilot_assume_mapped = true
+vim.g.copiot_tab_map = ""
 vim.g.mapleader = " "
 vim.g.coc_node_path = '$HOME/.nvm/versions/node/v18.9.0/bin/node'
 require('load_lazy')
