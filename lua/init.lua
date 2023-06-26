@@ -1,3 +1,6 @@
+vim.g.leetcode_browser = 'chrome'
+vim.g.leetcode_solution_filetype = 'python3'
+vim.g.leetcode_hide_paid_only = true
 vim.g.copilot_no_tab_map = true
 vim.g.copilot_assume_mapped = true
 vim.g.copiot_tab_map = ""
