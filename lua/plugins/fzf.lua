@@ -8,6 +8,8 @@ return {
 		local keyset = vim.keymap.set
 		keyset('i', '<C-f>', 'fzf#vim#complete#path("rg --files")', { silent = true, expr = true, noremap = true })
 		keyset('n', '<C-/>', '<cmd>BLines<CR>', { silent = true, noremap = true })
+		-- following is needed for tmux since tmux maps <C-/> to <C-_>
+		keyset('n', '<C-_>', '<cmd>BLines<CR>', { silent = true, noremap = true })
 		keyset('n', '<C-f>', '<cmd>Files<CR>', { silent = true, noremap = true })
 		keyset('n', '<C-b>', '<cmd>Buffers<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>f', '<cmd>Files<cr>', { silent = true, noremap = true })
