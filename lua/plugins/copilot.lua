@@ -53,7 +53,7 @@ return {
 				svn = false,
 				cvs = false,
 				['*'] = function()
-					if string.find(vim.fn.expand('%:p'), '/lc_rust/') then
+					if string.find(vim.fn.expand('%:p'), '/lc/') then
 						return false
 					else
 						return true
