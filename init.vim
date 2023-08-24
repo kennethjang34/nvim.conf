@@ -1,5 +1,5 @@
-call plug#begin() 
-call plug#end()
+" call plug#begin() 
+" call plug#end()
 "autocmd BufEnter * lcd %:p:h
 let path_to_open = expand('%:p:h')
 exec "lcd " . path_to_open
