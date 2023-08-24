@@ -6,7 +6,9 @@ vim.g.leetcode_hide_paid_only = true
 -- vim.g.copiot_tab_map = ""
 vim.g.vimwiki_key_mappings = { all_maps = 0 }
 vim.g.mapleader = " "
-vim.g.coc_node_path = '$HOME/.nvm/versions/node/v18.9.0/bin/node'
+if os.getenv("NVM_BIN") then
+	vim.g.coc_node_path = "$NVM_BIN/node"
+end
 require('load_lazy')
 --vim.cmd([[colorscheme gruvbox]])
 vim.o.background = "dark"
