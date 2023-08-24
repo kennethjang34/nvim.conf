@@ -1,24 +1,18 @@
 vim.g.leetcode_browser = 'chrome'
 vim.g.leetcode_solution_filetype = 'python3'
 vim.g.leetcode_hide_paid_only = true
--- vim.g.copilot_no_tab_map = true
--- vim.g.copilot_assume_mapped = true
--- vim.g.copiot_tab_map = ""
 vim.g.vimwiki_key_mappings = { all_maps = 0 }
 vim.g.mapleader = " "
 if os.getenv("NVM_BIN") then
 	vim.g.coc_node_path = "$NVM_BIN/node"
 end
 require('load_lazy')
---vim.cmd([[colorscheme gruvbox]])
 vim.o.background = "dark"
--- colorscheme is set to gruvbox in plugins/gruvbox.lua
 local api = vim.api
 local keyset = vim.keymap.set
 vim.opt.termguicolors = true
 vim.api.nvim_set_option('hlsearch', false)
 vim.opt.autoindent = false
---vim.opt.update_time = 300
 vim.opt.signcolumn = "yes"
 function _G.check_back_space()
 	local col = vim.fn.col('.') - 1
@@ -51,9 +45,5 @@ vim.o.timeoutlen = 450
 vim.o.confirm = true
 keyset('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
--- normal mode <c-j> and <c-k> keymaps are configured in plugins/coc.lua
--- keyset('n', 'q:', '<nop>')
--- keyset('n', 'q/', '<nop>')
--- keyset('n', 'q?', '<nop>')
 keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })
 keyset('i', '<c-j>', '<cr>', { silent = true, noremap = true })
