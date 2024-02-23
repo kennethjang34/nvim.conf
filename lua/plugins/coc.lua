@@ -10,40 +10,34 @@ return {
 			vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 		end
 
-		--local opts = { silent = true, noremap = true, expr = true, replace_keycodes = false }
 		local opts = { silent = true, noremap = true, expr = true }
 		vim.g.coc_global_extensions = {
 			'coc-snippets',
-			'coc-tsserver',
 			'coc-eslint',
 			'coc-prettier',
 			'coc-json',
+			'coc-tsserver',
 		}
 		map('v', '<leader>f', '<Plug>(coc-format-selected)', opts)
-		--vmap <leader>f <Plug>(coc-format-selected)
-		--let g:coc_global_extensions = [
-		--\ 'coc-snippets',
-		--"\ 'coc-tsserver',
-		--\ 'coc-eslint',
-		--\ 'coc-prettier',
-		--\ 'coc-json',
-		--\ ]
-		-- inoremap <silent><expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<C-g>u\<CR>"
 		map('i', '<TAB>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<C-g>u\\<TAB>"', opts)
-		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'<C-q>'", opts)
-		-- map("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<TAB>" : coc#refresh()',
-		-- 	opts)
-		map("i", "<S-TAB>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"]], opts)
+		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'\\<C-q>'", opts)
+		map("i", "<C-u>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-u>"]], opts)
+		map("i", "<C-d>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_space() ? "<C-d>" : coc#refresh()',
+			opts)
+		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'\\<C-q>'", opts)
 		map("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true, noremap = true })
 		map("x", "<C-s>", "<Plug>(coc-range-select)", { silent = true, noremap = true })
-		map("n", "<C-j>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-j>"', { silent = true, noremap = true })
-		map("n", "<C-k>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-k>"', { silent = true, noremap = true })
 		map("i", "<C-j>",
-			'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+			'coc#float#has_scroll() ? coc#float#scroll(1) : "\\<C-j>"',
+			{ noremap = true, expr = true })
 		map("i", "<C-k>",
-			'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
-		map("v", "<C-j>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-j>"', { silent = true, noremap = true })
-		map("v", "<C-k>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-k>"', { silent = true, noremap = true })
+			'coc#float#has_scroll() ? coc#float#scroll(0) : "\\<C-k>"',
+			{ noremap = true, expr = true })
+
+
+
+
+
 		vim.opt.backup = false
 		vim.opt.writebackup = false
 		local keyset = vim.keymap.set
@@ -94,10 +88,11 @@ return {
 		local opts = { silent = true, nowait = true, expr = true }
 		keyset("n", "<C-j>", 'coc#float#has_scroll() ? coc#float#scroll(1) : ":wincmd j<CR>"', opts)
 		keyset("n", "<C-k>", 'coc#float#has_scroll() ? coc#float#scroll(0) : ":wincmd k<CR>"', opts)
-		keyset("i", "<C-f>",
-			'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
-		keyset("i", "<C-b>",
-			'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
+
+		-- keyset("i", "<C-f>",
+		-- 	'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(1)<cr>" : "<Right>"', opts)
+		-- keyset("i", "<C-b>",
+		-- 	'coc#float#has_scroll() ? "<c-r>=coc#float#scroll(0)<cr>" : "<Left>"', opts)
 		keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
 		keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 		keyset('n', '<leader>jm', '<plug>(coc-float-jump)', { silent = true, noremap = true })

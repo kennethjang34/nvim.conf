@@ -1,9 +1,3 @@
---
--- there is a lua syntax bug in neovim v0.9.4 (bug exists since after v0.7.4)
--- the following line is a workaround for the bug by using the lua syntax file from v0.7.2
--- curl -sS https://raw.githubusercontent.com/neovim/neovim/v0.7.2/runtime/syntax/lua.vim > $VIMRUNTIME/syntax/lua.vim
---
-vim.g.ts_highlight_lua = true
 vim.g.leetcode_browser = 'chrome'
 vim.g.leetcode_solution_filetype = 'python3'
 vim.g.leetcode_hide_paid_only = true
@@ -17,7 +11,6 @@ vim.o.background = "dark"
 local api = vim.api
 local keyset = vim.keymap.set
 vim.opt.termguicolors = true
-
 vim.api.nvim_set_option('hlsearch', false)
 vim.opt.autoindent = false
 vim.opt.signcolumn = "yes"
@@ -60,4 +53,5 @@ vim.o.timeoutlen = 450
 vim.o.confirm = true
 keyset('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
--- keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })
+keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })
+print("test")

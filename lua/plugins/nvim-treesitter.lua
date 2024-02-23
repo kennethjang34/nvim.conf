@@ -5,6 +5,25 @@ return {
 		dependencies = { 'nvim-treesitter/nvim-treesitter' },
 		config = function()
 			require "nvim-treesitter.configs".setup {
+				enable = true,
+				ensure_installed = {
+					"bash",
+					"css",
+					"dockerfile",
+					"go",
+					"html",
+					"javascript",
+					"json",
+					"lua",
+					"python",
+					"regex",
+					"rust",
+					"scss",
+					"toml",
+					"tsx",
+					"typescript",
+				},
+
 				playground = {
 					enable = true,
 					disable = {},

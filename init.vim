@@ -1,15 +1,12 @@
 " call plug#begin() 
 " call plug#end()
-"autocmd BufEnter * lcd %:p:h
+" autocmd BufEnter * lcd %:p:h
+
 let path_to_open = expand('%:p:h')
 exec "lcd " . path_to_open
 let g:loaded_netrw       = 1
 let g:loaded_netrwPlugin = 1
 set guicursor=i:block
-"augroup terminal
-	"autocmd!
-	"autocmd FileType floaterm tnoremap <buffer> <ESC> <C-\><C-n>
-"augroup END
 
 let g:rooter_target='*.yml,*.yaml'
 let g:rooter_patterns = ['.git', 'Makefile', '*.sln', 'build/env.sh']
@@ -322,5 +319,16 @@ set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 noremap <F5> :set list!<CR>
 inoremap <F5> <C-o>:set list!<CR>
 cnoremap <F5> <C-c>:set list!<CR>
-"nnoremap <space>x <Plug>JupyterExecute
-"nnoremap <LocalLeader>X <Plug>JupyterExecuteAll
+let g:vimtex_compiler_latexmk = {
+    \ 'options' : [
+    \   '-pdf',
+    \   '-pdflatex="lualatex --shell-escape %O %S"',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \   '-interaction=nonstopmode',
+    \ ]
+    \}
+let g:vimtex_view_method = 'skim'
+let maplocalleader = " "
+let g:vimtex_quickfix_mode = 0

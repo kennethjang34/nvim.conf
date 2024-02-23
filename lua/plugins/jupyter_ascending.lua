@@ -8,7 +8,7 @@ return {
 		local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 		local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 		augroup('JupyterAscending', { clear = true })
-		autocmd('BufRead,BufNewFile', {
+		autocmd({ 'BufRead', 'BufNewFile' }, {
 			group = 'JupyterAscending',
 			pattern = "*.sync.py",
 			callback = function()

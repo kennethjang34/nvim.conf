@@ -17,6 +17,7 @@ return {
 
 		local nvim_tree_api = require('nvim-tree.api')
 		local api = nvim_tree_api
+
 		function M.print_node_path()
 			local node = nvim_tree_api.tree.get_node_under_cursor()
 			print(node.absolute_path)
@@ -36,9 +37,8 @@ return {
 			vim.keymap.set('n', 'p', api.fs.paste, opts('Paste'))
 		end
 		require("nvim-tree").setup({
-			--auto_close = true,
 			sort_by = "case_sensitive",
-			--actions = {open_file = { quit_on_open = true, } },
+			actions = { open_file = { quit_on_open = true, } },
 			renderer = {
 				group_empty = true,
 				indent_markers = {
@@ -78,6 +78,13 @@ return {
 			},
 			filters = {
 				dotfiles = false,
+				custom = {
+					"*.pyc",
+					".DS_Store",
+					"*.png",
+					"*.jpg",
+					"*.jpeg",
+				}
 			},
 			update_focused_file = {
 				enable = true,

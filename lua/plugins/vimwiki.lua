@@ -1,5 +1,6 @@
 return {
 	'vimwiki/vimwiki',
+	enabled = false,
 	config = function()
 		local keyset = vim.keymap.set
 		-- vim.g.vimwiki_key_mappings = { all_maps = 1, global = 1 }
