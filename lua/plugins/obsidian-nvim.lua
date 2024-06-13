@@ -1,6 +1,5 @@
 return {
 	"epwalsh/obsidian.nvim",
-	lazy = false,
 	config = function()
 		require('obsidian').setup({
 			-- your config options...

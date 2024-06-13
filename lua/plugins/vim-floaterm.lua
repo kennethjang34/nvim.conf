@@ -1,7 +1,9 @@
 return {
 	'voldikss/vim-floaterm',
 	config = function()
-		--require('plugins.floaterm')
+		vim.g.floaterm_position = "bottomright"
+		vim.g.floaterm_width = 0.4
+		vim.g.floaterm_height = 0.4
 		local function map(mode, lhs, rhs, opts)
 			local options = { noremap = true, silent = true }
 			if opts then
@@ -37,10 +39,14 @@ return {
 					"<C-\\><C-n>:FloatermUpdate --width=1.0 --height=0.3 --wintype=split --position=botright<CR>",
 					{ silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, "n", "<F6>",
-					":FloatermUpdate --width=0.4 --height=0.4 --wintype=float --position=bottomright<CR>",
+					":FloatermUpdate --width=" ..
+					vim.g.floaterm_width .. "--height=" .. vim.g.floaterm_height .. " --wintype=float --position=" ..
+					vim.g.floaterm_position .. "<CR>",
 					{ silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, "t", "<F6>",
-					"<C-\\><C-n>:FloatermUpdate --width=0.4 --height=0.4 --wintype=float --position=bottomright<CR>",
+					"<C-\\><C-n>:FloatermUpdate --width=" .. vim.g.floaterm_width .. " --height=" ..
+					vim.g.floaterm_height .. " --wintype=float --position=" ..
+					vim.g.floaterm_position .. "<CR>",
 					{ silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, "t", "<ESC>", "<C-\\><C-n>", { silent = true, noremap = true })
 			end

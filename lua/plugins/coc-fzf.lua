@@ -1,1 +1,2 @@
-return { 'antoinemadec/coc-fzf', branch = 'release' }
+return { 'antoinemadec/coc-fzf', branch = 'release'
+}

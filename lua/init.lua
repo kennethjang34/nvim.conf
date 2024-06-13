@@ -28,6 +28,11 @@ vim.api.nvim_create_user_command('Wq', function(opts)
 	vim.cmd('w')
 	vim.cmd('q')
 end, { nargs = 0 })
+vim.api.nvim_create_user_command('Wqa', function(opts)
+	vim.cmd('w')
+	vim.cmd('q')
+	vim.cmd('a')
+end, { nargs = 0 })
 function _G.check_back_space()
 	local col = vim.fn.col('.') - 1
 	return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
@@ -60,4 +65,3 @@ vim.o.timeoutlen = 450
 vim.o.confirm = true
 keyset('n', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 keyset('n', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
--- keyset('n', 'q', '<nop>', { silent = true, noremap = true, nowait = true })

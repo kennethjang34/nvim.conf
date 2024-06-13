@@ -22,6 +22,11 @@ return {
 		keyset('n', '<leader>gf', '<cmd>GFiles<cr>', { silent = true, noremap = true })
 		keyset('n', '<leader>m', '<cmd>Marks<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>M', '<cmd>Maps<CR>', { silent = true, noremap = true })
+		-- keyset('n', '<C-M>', '<plug>(fzf-maps-n)', { silent = true, noremap = true, expr = false })
+
+		keyset('i', '<C-_>', '<plug>(fzf-maps-i)', { silent = true, noremap = true, expr = false })
+		keyset('x', '<C-_>', '<plug>(fzf-maps-x)', { silent = true, noremap = true, expr = false })
+		keyset('o', '<C-_>', '<plug>(fzf-maps-o)', { silent = true, noremap = true, expr = false })
 		keyset('n', '<leader>C', '<cmd>Commits<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>H', '<cmd>Helptags<CR>', { silent = true, noremap = true })
 		keyset('n', '<leader>hh', '<cmd>History<CR>', { silent = true, noremap = true })

@@ -40,7 +40,8 @@ return {
 			sort_by = "case_sensitive",
 			actions = { open_file = { quit_on_open = true, } },
 			renderer = {
-				group_empty = true,
+				group_empty = false,
+				full_name = true,
 				indent_markers = {
 					enable = true,
 				},
@@ -92,7 +93,7 @@ return {
 				ignore_list = {},
 			},
 			on_attach = nvim_tree_on_attach,
-			view = { width = '20%' },
+			view = { width = '25%', side = "left" },
 		})
 		vim.g.nvim_tree_respect_buf_cwd = 0
 		vim.api.nvim_create_autocmd({ "VimEnter" }, {
