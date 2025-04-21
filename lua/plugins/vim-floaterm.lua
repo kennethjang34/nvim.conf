@@ -4,6 +4,7 @@ return {
 		vim.g.floaterm_position = "bottomright"
 		vim.g.floaterm_width = 0.6
 		vim.g.floaterm_height = 0.4
+		vim.g.floaterm_autoinsert = true
 		local function map(mode, lhs, rhs, opts)
 			local options = { noremap = true, silent = true }
 			if opts then
@@ -14,7 +15,6 @@ return {
 		end
 
 		local function switch_term_type()
-			print(vim.g.floaterm_wintype)
 			if vim.g.floaterm_wintype == "split" then
 				vim.g.floaterm_wintype = "float"
 				vim.cmd("FloatermUpdate  --width=0.6 --height=0.4 --wintype=float --position=bottomright")
@@ -23,6 +23,9 @@ return {
 				vim.cmd("FloatermUpdate --width=1.0 --height=0.3 --wintype=split --position=botright")
 			end
 		end
+
+
+
 		-- function floatermToggle()
 		-- 	if vim.o.columns > 180 then
 		-- 		vim.cmd("FloatermToggle --width=0.4 --height=0.4 --wintype=split --position=right")
@@ -44,10 +47,17 @@ return {
 		local augroup = vim.api.nvim_create_augroup -- Create/get autocommand group
 		local autocmd = vim.api.nvim_create_autocmd -- Create autocommand
 		augroup('Floaterm', { clear = true })
-		autocmd('FileType', {
+		autocmd('User', {
 			group = 'Floaterm',
-			pattern = "floaterm",
-			callback = function()
+			pattern = "FloatermOpen",
+			callback = function(ev)
+				-- vim.cmd("startinsert!")
+				-- vim.fn['floaterm#util#startinsert']()
+				-- autocmd! User FloatermOpen
+				-- autocmd User FloatermOpen call floaterm#util#startinsert()
+				-- autocmd BufEnter <buffer> call floaterm#util#startinsert()
+
+				-- print(string.format('event fired: %s', vim.inspect(ev)))
 				-- vim.api.nvim_buf_set_keymap(0, 't', '<c-l>', '<cmd>wincmd l<cr>', { silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, 't', '<c-h>', '<cmd>wincmd h<cr>', { silent = true, noremap = true })
 				-- vim.api.nvim_buf_set_keymap(0, 't', '<c-j>', '<cmd>wincmd j<cr>', { silent = true, noremap = true })
@@ -58,16 +68,23 @@ return {
 				-- vim.api.nvim_buf_set_keymap(0, "t", "<F4>",
 				vim.api.nvim_buf_set_keymap(0, "t", "<F4>", "",
 					{ silent = true, noremap = true, callback = switch_term_type })
+				vim.api.nvim_buf_set_keymap(0, "t", "<F6>", "",
+					{ silent = true, noremap = true, callback = switch_term_type })
+				-- vim.api.nvim_buf_set_keymap(0, "n", "<F6>",
+				-- 	":FloatermUpdate --width=0.6 --height=0.3 --wintype=float --position=botright<CR>",
+				-- 	{ silent = true, noremap = true })
+
+				-- vim.g.floaterm_width = 0.6
+				-- vim.g.floaterm_height = 0.4
 				vim.api.nvim_buf_set_keymap(0, "n", "<F6>",
-					":FloatermUpdate --width=" ..
-					vim.g.floaterm_width .. "--height=" .. vim.g.floaterm_height .. " --wintype=float --position=" ..
+					":FloatermUpdate --width=0.6 --height=0.4 --wintype=float --position=" ..
 					vim.g.floaterm_position .. "<CR>",
 					{ silent = true, noremap = true })
-				vim.api.nvim_buf_set_keymap(0, "t", "<F6>",
-					"<C-\\><C-n>:FloatermUpdate --width=" .. vim.g.floaterm_width .. " --height=" ..
-					vim.g.floaterm_height .. " --wintype=float --position=" ..
-					vim.g.floaterm_position .. "<CR>",
-					{ silent = true, noremap = true })
+				-- vim.api.nvim_buf_set_keymap(0, "t", "<F6>",
+				-- 	"<C-\\><C-n>:FloatermUpdate --width=" .. vim.g.floaterm_width .. " --height=" ..
+				-- 	vim.g.floaterm_height .. " --wintype=float --position=" ..
+				-- 	vim.g.floaterm_position .. "<CR>",
+				-- 	{ silent = true, noremap = true })
 				vim.api.nvim_buf_set_keymap(0, "t", "<ESC>", "<C-\\><C-n>", { silent = true, noremap = true })
 			end
 		})
