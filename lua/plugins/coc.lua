@@ -1,6 +1,11 @@
 return {
 	'neoclide/coc.nvim',
 	branch = 'release',
+	init = function()
+		if os.getenv("NVM_BIN") then
+			vim.g.coc_node_path = "$NVM_BIN/node"
+		end
+	end,
 	config = function()
 		local function map(mode, lhs, rhs, opts)
 			local options = { noremap = true, silent = true }
@@ -19,7 +24,20 @@ return {
 			'coc-tsserver',
 		}
 		map('v', '<leader>f', '<Plug>(coc-format-selected)', opts)
-		map('i', '<TAB>', 'coc#pum#visible() ? coc#pum#confirm() : "\\<C-g>u\\<TAB>"', opts)
+
+		map('i', '<S-CR>',
+			[[coc#pum#visible() ? coc#pum#confirm() :  "<S-CR>"]],
+			opts)
+		vim.g.coc_snippet_next = '<TAB>'
+		vim.g.coc_snippet_prev = '<S-TAB>'
+		-- map('i', '<TAB>',
+		-- 	[[coc#jumpable() ? "\<C-r>=coc#snippet#next()\<CR>": "<TAB>"]],
+		-- 	opts)
+		-- map('i', '<S-TAB>',
+		-- 	[[coc#jumpable() ? "\<C-r>=coc#snippet#prev()\<CR>": "<S-TAB>"]],
+		-- 	opts)
+		map('x', '<TAB>', '<Plug>(coc-snippets-select)', { silent = true, noremap = true })
+
 		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'\\<C-q>'", opts)
 		map("i", "<C-k>", [[coc#pum#visible() ? coc#pum#prev(1) : "\<C-k>"]], opts)
 		map("i", "<C-j>", 'coc#pum#visible() ? coc#pum#next(1) : "<C-j>"',
@@ -29,8 +47,6 @@ return {
 			opts)
 		map("i", "<C-q>", "coc#pum#visible() ? '<C-o>coc#_hide()':'\\<C-q>'", opts)
 		map("n", "<C-s>", "<Plug>(coc-range-select)", { silent = true, noremap = true })
-
-
 		vim.opt.backup = false
 		vim.opt.writebackup = false
 		local keyset = vim.keymap.set
@@ -46,19 +62,23 @@ return {
 		keyset("n", "gh", "<Plug>(coc-diagnostic-info)",
 			{ silent = true, noremap = true })
 		keyset("n", "<c-q>", "<Plug>(coc-float-hide)", { silent = true, noremap = true })
-		function _G.show_docs()
+		_G.show_docs = function()
 			local cw = vim.fn.expand('<cword>')
 			if vim.fn.index({ 'vim', 'help' }, vim.bo.filetype) >= 0 then
 				vim.api.nvim_command('h ' .. cw)
 			elseif vim.api.nvim_eval('coc#rpc#ready()') then
-				vim.fn.CocActionAsync('doHover')
+				vim.fn.CocActionAsync('definitionHover')
+				-- vim.fn.CocActionAsync('doHover')
 			else
 				vim.api.nvim_command('!' .. vim.o.keywordprg .. ' ' .. cw)
 			end
 		end
 
+		-- -- following keybinding is currently set in init.vim for tex specific issue. (can just migrate here if needed)
 		keyset("n", "K", '<CMD>lua _G.show_docs()<CR>', { silent = true })
-		vim.api.nvim_create_augroup("CocGroup", {})
+
+
+		vim.api.nvim_create_augroup("CocGroup", { clear = true })
 		vim.api.nvim_create_autocmd("CursorHold", {
 			group = "CocGroup",
 			command = "silent call CocActionAsync('highlight')",
@@ -75,15 +95,20 @@ return {
 		vim.api.nvim_create_user_command("Fold", "call CocAction('fold', <f-args>)", { nargs = '?' })
 
 		vim.api.nvim_create_user_command("OR", "call CocActionAsync('runCommand', 'editor.action.organizeImport')", {})
-		local opts = { silent = true, nowait = true, expr = true }
+		local opts = { silent = true, nowait = true, expr = true, noremap = true }
 		keyset("n", "<C-j>", 'coc#float#has_scroll() ? coc#float#scroll(1,1) : ":wincmd j<CR>"', opts)
 		keyset("n", "<C-k>", 'coc#float#has_scroll() ? coc#float#scroll(0,1) : ":wincmd k<CR>"', opts)
+
+		-- keyset("n", "<C-d>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-d>"', opts)
+		-- keyset("n", "<C-u>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-u>"', opts)
+		-- keyset("n", "<C-j>", 'coc#float#has_scroll() ? coc#float#scroll(1,1) : "<C-j>"', opts)
+		-- keyset("n", "<C-k>", 'coc#float#has_scroll() ? coc#float#scroll(0,1) : "<C-k>"', opts)
 		keyset("n", "<C-d>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-d>"', opts)
 		keyset("n", "<C-u>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-u>"', opts)
 
-		-- keyset("v", "<C-f>", 'coc#float#has_scroll() ? coc#float#scroll(1) : "<C-f>"', opts)
-		-- keyset("v", "<C-b>", 'coc#float#has_scroll() ? coc#float#scroll(0) : "<C-b>"', opts)
 		keyset('n', '<leader>jm', '<plug>(coc-float-jump)', { silent = true, noremap = true })
 		keyset('n', '<space>y', '<cmd>CocList --normal yank<cr>', { silent = true, noremap = true })
+		-- keyset('i', '<M-j>', '<C-r>=coc#snippet#next()<CR>', { silent = true, noremap = true })
+		-- keyset('i', '<M-k>', '<C-r>=coc#snippet#prev()<CR>', { silent = true, noremap = true })
 	end
 }

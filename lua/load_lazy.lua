@@ -28,4 +28,5 @@ require('lazy').setup('plugins', {
 		enabled = true,
 		notify = false, -- get a notification when changes are found
 	},
+	root = vim.fn.stdpath("data") .. "/lazy",
 })

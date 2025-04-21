@@ -18,12 +18,12 @@ augroup razorToHTML
     autocmd!
     autocmd BufNewFile,BufRead **/*.cshtml :set filetype=html
 augroup END
-nnoremap <silent><expr> <LocalLeader>r  :MagmaEvaluateOperator<CR>
-nnoremap <silent>       <LocalLeader>rr :MagmaEvaluateLine<CR>
-xnoremap <silent>       <LocalLeader>r  :<C-u>MagmaEvaluateVisual<CR>
-nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
-nnoremap <silent>       <LocalLeader>d :MagmaDelete<CR>
-nnoremap <silent>       <LocalLeader>o :MagmaShowOutput<CR>
+" nnoremap <silent><expr> <LocalLeader>r  :MagmaEvaluateOperator<CR>
+" nnoremap <silent>       <LocalLeader>rr :MagmaEvaluateLine<CR>
+" xnoremap <silent>       <LocalLeader>r  :<C-u>MagmaEvaluateVisual<CR>
+" nnoremap <silent>       <LocalLeader>rc :MagmaReevaluateCell<CR>
+" nnoremap <silent>       <LocalLeader>d :MagmaDelete<CR>
+" nnoremap <silent>       <LocalLeader>o :MagmaShowOutput<CR>
 
 
 let g:magma_automatically_open_output = v:false
@@ -35,7 +35,6 @@ set directory^=$HOME/.vim/swap//
 set backupdir^=$HOME/.vim/backup//
 set undodir^=$HOME/.vim/undo//
 
-"autocmd VimEnter * call StartUp()
 autocmd FocusGained * checktime
 se cursorline
 set softtabstop=0 noexpandtab
@@ -43,8 +42,8 @@ set shiftwidth=4
 set tabstop=4
 set smartindent
 autocmd Filetype python setlocal expandtab
-inoremap jk <ESC>
-let g:NERDCreateDefaultMappings = 0
+" inoremap jk <ESC>
+" let g:NERDCreateDefaultMappings = 0
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " j/k will move virtual lines (lines that wrap)
@@ -55,8 +54,8 @@ set relativenumber
 set smarttab
 set cindent
 set termguicolors
-let g:airline_powerline_fonts = 1
-let g:airline_theme='base16_gruvbox_dark_hard'
+" let g:airline_powerline_fonts = 1
+" let g:airline_theme='base16_gruvbox_dark_hard'
 hi Visual term=NONE cterm=NONE gui=NONE
 
 set hidden 
@@ -129,7 +128,8 @@ function! s:coc_float_scroll(amount) abort
   call nvim_win_set_cursor(float, pos)
   return ''
 endfunction
-  set scrolloff=8
+
+set scrolloff=8
 vnoremap <c-j> :m+<cr>gv
 vnoremap <c-k> :m-2<cr>gv
 function! GoBackToRecentBuffer()
@@ -147,8 +147,8 @@ function! GoBackToRecentBuffer()
 	endif
 	
   endwhile
-
 endfunction
+
 nnoremap <silent> <S-TAB> :call GoBackToRecentBuffer()<Enter>
 
 " Fast window resizing with left/right keys (horizontal); / and up/down keys (vertical)
@@ -172,6 +172,47 @@ let g:vimtex_compiler_latexmk = {
     \   '-interaction=nonstopmode',
     \ ]
     \}
-let g:vimtex_view_method = 'skim'
-let g:vimtex_quickfix_mode = 0
-" let g:vimtex_format_enabled = 1
+cnoremap <expr> <up> wildmenumode() ? "\<left>" : "\<up>"
+cnoremap <expr> <down> wildmenumode() ? "\<right>" : "\<down>"
+cnoremap <expr> <left> wildmenumode() ? "\<up>" : "\<left>"
+cnoremap <expr> <right> wildmenumode() ? " \<bs>\<C-Z>" : "\<right>"
+set title
+set titlestring=%f
+
+
+" nnoremap <silent> K :call <sid>show_documentation()<cr>
+"     function! s:show_documentation()
+"       if index(['vim', 'help'], &filetype) >= 0
+"         execute 'help ' . expand('<cword>')
+"       elseif &filetype ==# 'tex'
+"         VimtexDocPackage
+"       else
+"         call CocAction('doHover')
+"       endif
+" endfunction
+
+" silent! inoremap  <C-l>   <Plug>(eskk:toggle)
+let g:eskk#directory = "~/.config/eskk"
+let g:eskk#dictionary = { 'path': "~/.config/eskk/my_jisyo", 'sorted': 1, 'encoding': 'utf-8',}
+let g:eskk#large_dictionary = {'path': "~/.config/eskk/SKK-JISYO.L", 'sorted': 1, 'encoding': 'euc-jp',}
+"
+autocmd User eskk-initialize-post call s:eskk_initial_pre()
+function! s:eskk_initial_pre() abort
+    EskkUnmap -type=sticky ;
+    EskkMap -type=sticky Q
+endfunction
+function L_eskk_get_mode()
+    if (mode() == 'i') && eskk#is_enabled()
+        return g:eskk#statusline()
+    else
+        return ''
+    endif
+endfunction
+let g:lightline = {
+\   'active': {
+\     'left': [ ['mode', 'paste'], ['readonly', 'filename', 'eskk', 'modified'] ]
+\   },
+\   'component_function': {
+\     'eskk': 'L_eskk_get_mode'
+\   },
+\ }

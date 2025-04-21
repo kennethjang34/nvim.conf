@@ -3,29 +3,36 @@ return {
 	cmd = "Copilot",
 	event = "InsertEnter",
 	config = function()
-		vim.keymap.set("i", "<c-s>",
+		vim.keymap.set("i", "<M-s>",
 			function()
 				local cp_sg = require("copilot.suggestion")
+				-- if require("copilot.suggestion").is_visible() then
 				if require("copilot.suggestion").is_visible() then
 					cp_sg.dismiss()
 					cp_sg.toggle_auto_trigger()
-				else
+				elseif not cp_sg.auto_trigger then
 					cp_sg.toggle_auto_trigger()
 					cp_sg.next()
 				end
 			end,
 			{ noremap = true, silent = true, expr = false, replace_keycodes = false })
 		-- '<cmd>lua require("copilot.suggestion").dismiss()<cr> <cmd>lua require("copilot.suggestion").toggle_auto_trigger()<cr>',
+		vim.keymap.set("i", "<M-a>", '<nop>', {})
+		vim.keymap.set("i", "<M-n>", '<nop>', {})
+		vim.keymap.set("i", "<M-p>", '<nop>', {})
+		vim.keymap.set("i", "<M-j>", '<nop>', {})
+		vim.keymap.set("i", "<M-k>", '<nop>', {})
+		vim.keymap.set("i", "<M-o>", '<nop>', {})
 		require('copilot').setup({
 			panel = {
 				enabled = false,
 				auto_refresh = false,
 				keymap = {
-					jump_prev = "<c-k>",
-					jump_next = "<c-j>",
+					jump_prev = "<C-k>",
+					jump_next = "<C-j>",
 					accept = "<CR>",
 					refresh = "gr",
-					open = "<C-CR>"
+					open = "<M-O>"
 				},
 				layout = {
 					position = "bottom", -- | top | left | right
@@ -34,14 +41,14 @@ return {
 			},
 			suggestion = {
 				enabled = true,
-				auto_trigger = true,
+				auto_trigger = false,
 				debounce = 75,
 				keymap = {
-					accept = "<c-l>",
+					accept = "<M-a>",
 					accept_word = false,
 					accept_line = false,
-					next = "<c-n>",
-					prev = "<c-p>",
+					next = "<M-n>",
+					prev = "<M-p>",
 					dismiss = "<C-]>",
 				},
 			},

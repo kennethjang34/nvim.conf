@@ -1,12 +1,12 @@
 return {
 	'junegunn/fzf.vim',
+	enabled = false,
 	dependencies = {
 		'junegunn/fzf',
 	},
 	config = function()
-		--local opts = { silent = true, nowait = true, expr = true }
 		local keyset = vim.keymap.set
-		keyset('i', '<C-f>', 'fzf#vim#complete#path("rg --files")', { silent = true, expr = true, noremap = true })
+		-- keyset('i', '<C-f>', 'fzf#vim#complete#path("rg --files")', { silent = true, expr = true, noremap = true })
 		keyset('n', '<C-/>', '<cmd>BLines<CR>', { silent = true, noremap = true })
 		-- following is needed for tmux since tmux maps <C-/> to <C-_>
 		keyset('n', '<C-_>', '<cmd>BLines<CR>', { silent = true, noremap = true })

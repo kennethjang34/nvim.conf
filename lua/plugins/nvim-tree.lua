@@ -3,6 +3,29 @@ return {
 	--enabled = false,
 	lazy = false,
 	dependencies = { 'nvim-tree/nvim-web-devicons' },
+	init = function()
+		vim.api.nvim_create_autocmd({ "VimEnter" }, {
+			group = vim.api.nvim_create_augroup("NvimTreeOpen", { clear = true }),
+			callback = function(data)
+				-- buffer is a [No Name]
+				-- local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+				local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
+				-- buffer is a directory
+				local directory = vim.fn.isdirectory(data.file) == 1
+				if no_name or not directory then
+					return
+				end
+
+				if directory then
+					vim.cmd.cd(data.file)
+				end
+
+				-- open the tree
+				require("nvim-tree.api").tree.open()
+			end
+		}
+		)
+	end,
 	config = function()
 		local function map(mode, lhs, rhs, opts)
 			local options = { noremap = true, silent = true }
@@ -81,10 +104,18 @@ return {
 				dotfiles = false,
 				custom = {
 					"*.pyc",
-					".DS_Store",
+					"*.DS_Store",
 					"*.png",
 					"*.jpg",
 					"*.jpeg",
+					"*.pdf",
+					"*.gz",
+					"*.",
+					"*.aux",
+					"*.fls",
+					"*.fdb_latexmk",
+					"*.xdv",
+					"*.out",
 				}
 			},
 			update_focused_file = {
@@ -96,31 +127,6 @@ return {
 			view = { width = '25%', side = "left" },
 		})
 		vim.g.nvim_tree_respect_buf_cwd = 0
-		vim.api.nvim_create_autocmd({ "VimEnter" }, {
-			group = vim.api.nvim_create_augroup("NvimTreeOpen", { clear = true }),
-			callback = function(data)
-				-- buffer is a [No Name]
-				local no_name = data.file == "" and vim.bo[data.buf].buftype == ""
-
-				-- buffer is a directory
-				local directory = vim.fn.isdirectory(data.file) == 1
-
-				if not no_name and not directory then
-					return
-				end
-
-				-- change to the directory
-				if directory then
-					vim.cmd.cd(data.file)
-				end
-
-				-- open the tree
-				require("nvim-tree.api").tree.open()
-				--require("nvim-tree.api").tree.toggle()
-			end
-			--callback = open_nvim_tree
-		}
-		)
 		--vim.api.nvim_create_autocmd("BufEnter", {
 		--group = vim.api.nvim_create_augroup("NvimTreeClose", { clear = true }),
 		--callback = function(bufData)
